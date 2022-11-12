@@ -34,16 +34,22 @@ namespace TestProject2
             {
                 if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
                 {
-                    result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
+                    var overlappingStart = start;
+                    var overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
+                    result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
                 {
-                    result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
+                    var overlappingStart = new DateTime(end.Year, end.Month, 1);
+                    var overlappingEnd = end;
+                    result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else
                 {
                     var temp = currentDate;
-                    result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
+                    var overlappingStart = new DateTime(temp.Year, temp.Month, 1);
+                    var overlappingEnd = new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1);
+                    result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
 
                 currentDate = currentDate.AddMonths(1);
