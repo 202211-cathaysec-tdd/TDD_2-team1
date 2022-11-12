@@ -35,7 +35,7 @@ namespace TestProject2
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
-                    var overlappingDays = new Period(start, end).OverlappingDays(budget);
+                    var overlappingDays = new Period(start, end).OverlappingDays(new Period(budget.FirstDay(), budget.LastDay()));
 
                     var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
 

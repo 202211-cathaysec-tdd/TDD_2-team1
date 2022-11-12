@@ -17,10 +17,8 @@ namespace TestProject2
         public DateTime End { get; private set; }
         public DateTime Start { get; private set; }
 
-        public decimal OverlappingDays(Budget budget)
+        public decimal OverlappingDays(Period another)
         {
-            var another = new Period(budget.FirstDay(), budget.LastDay());
-
             DateTime overlappingStart = Start > another.Start
                 ? Start
                 : another.Start;
