@@ -11,36 +11,36 @@ namespace TestProject2
         public int Amount { get; set; }
         public string YearMonth { get; set; }
 
-        public Period CreatePeriod()
+        public decimal OverlappingAmount(Period period)
+        {
+            return period.OverlappingDays(CreatePeriod()) * DailyAmount();
+        }
+
+        private Period CreatePeriod()
         {
             return new Period(FirstDay(), LastDay());
         }
 
-        public decimal Days()
-        {
-            return LastDay().Day;
-        }
-
-        public DateTime FirstDay()
-        {
-            return DateTime.ParseExact(YearMonth, "yyyyMM", null);
-        }
-
-        public DateTime LastDay()
-        {
-            var firstDay = FirstDay();
-            var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
-            return new DateTime(firstDay.Year, firstDay.Month, daysInMonth);
-        }
-
-        public decimal DailyAmount()
+        private decimal DailyAmount()
         {
             return Amount / Days();
         }
 
-        public decimal OverlappingAmount(Period period)
+        private decimal Days()
         {
-            return period.OverlappingDays(CreatePeriod()) * DailyAmount();
+            return LastDay().Day;
+        }
+
+        private DateTime FirstDay()
+        {
+            return DateTime.ParseExact(YearMonth, "yyyyMM", null);
+        }
+
+        private DateTime LastDay()
+        {
+            var firstDay = FirstDay();
+            var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+            return new DateTime(firstDay.Year, firstDay.Month, daysInMonth);
         }
     }
 }
