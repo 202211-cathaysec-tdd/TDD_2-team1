@@ -23,10 +23,6 @@ namespace TestProject2
                 return 0;
             }
 
-            var result = _budget.GetAll();
-
-            var queryEnd = end.ToString("yyyyyMM");
-
             decimal reuslt = 0;
 
             if (start.Year == end.Year && start.Month == end.Month)
