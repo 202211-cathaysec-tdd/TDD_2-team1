@@ -46,9 +46,8 @@ namespace TestProject2
                 }
                 else
                 {
-                    var temp = currentDate;
-                    overlappingStart = new DateTime(temp.Year, temp.Month, 1);
-                    overlappingEnd = new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1);
+                    overlappingStart = new DateTime(currentDate.Year, currentDate.Month, 1);
+                    overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
                 }
 
                 result += GetDayBudget(overlappingStart, overlappingEnd);
