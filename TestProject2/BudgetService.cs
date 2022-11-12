@@ -30,12 +30,13 @@ namespace TestProject2
 
             var currentDate = start;
             decimal result = 0;
+            var period = new Period(start, end);
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
-                    var overlappingDays = new Period(start, end).OverlappingDays(new Period(budget.FirstDay(), budget.LastDay()));
+                    var overlappingDays = period.OverlappingDays(new Period(budget.FirstDay(), budget.LastDay()));
 
                     var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
 
