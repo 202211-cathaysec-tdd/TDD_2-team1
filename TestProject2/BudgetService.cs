@@ -35,25 +35,7 @@ namespace TestProject2
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
-                    DateTime overlappingStart;
-                    DateTime overlappingEnd;
-                    if (budget.YearMonth == start.ToString("yyyyMM"))
-                    {
-                        overlappingStart = start;
-                        overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
-                    }
-                    else if (budget.YearMonth == end.ToString("yyyyMM"))
-                    {
-                        overlappingStart = new DateTime(end.Year, end.Month, 1);
-                        overlappingEnd = end;
-                    }
-                    else
-                    {
-                        overlappingStart = budget.FirstDay();
-                        overlappingEnd = budget.LastDay();
-                    }
-
-                    decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
+                    var overlappingDays = OverlappingDays(start, end, budget);
 
                     var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
 
@@ -64,6 +46,30 @@ namespace TestProject2
             }
 
             return result;
+        }
+
+        private static decimal OverlappingDays(DateTime start, DateTime end, Budget budget)
+        {
+            DateTime overlappingStart;
+            DateTime overlappingEnd;
+            if (budget.YearMonth == start.ToString("yyyyMM"))
+            {
+                overlappingStart = start;
+                overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
+            }
+            else if (budget.YearMonth == end.ToString("yyyyMM"))
+            {
+                overlappingStart = new DateTime(end.Year, end.Month, 1);
+                overlappingEnd = end;
+            }
+            else
+            {
+                overlappingStart = budget.FirstDay();
+                overlappingEnd = budget.LastDay();
+            }
+
+            decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
+            return overlappingDays;
         }
 
         /// <summary>
