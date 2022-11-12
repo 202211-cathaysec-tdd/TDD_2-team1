@@ -38,18 +38,13 @@ namespace TestProject2
                 {
                     var overlappingDays = period.OverlappingDays(budget.CreatePeriod());
 
-                    result += overlappingDays * DailyAmount(budget);
+                    result += overlappingDays * budget.DailyAmount();
                 }
 
                 currentDate = currentDate.AddMonths(1);
             }
 
             return result;
-        }
-
-        private static decimal DailyAmount(Budget budget)
-        {
-            return budget.Amount / budget.Days();
         }
 
         /// <summary>

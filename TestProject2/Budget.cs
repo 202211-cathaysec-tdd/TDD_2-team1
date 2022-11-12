@@ -32,5 +32,10 @@ namespace TestProject2
             var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
             return new DateTime(firstDay.Year, firstDay.Month, daysInMonth);
         }
+
+        public decimal DailyAmount()
+        {
+            return Amount / Days();
+        }
     }
 }
