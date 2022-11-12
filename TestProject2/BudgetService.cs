@@ -9,11 +9,11 @@ namespace TestProject2
 {
     public class BudgetService
     {
-        readonly IBudgetRepo _budget;
+        readonly IBudgetRepo _budgetRepo;
 
-        public BudgetService(IBudgetRepo budgetRepo)
+        public BudgetService(IBudgetRepo budgetRepoRepo)
         {
-            _budget = budgetRepo;
+            _budgetRepo = budgetRepoRepo;
         }
 
         public decimal Query(DateTime start, DateTime end)
@@ -31,9 +31,10 @@ namespace TestProject2
             var currentDate = start;
             decimal result = 0;
             var period = new Period(start, end);
+
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
-                var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
+                var budget = _budgetRepo.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
                     result += budget.OverlappingAmount(period);
@@ -57,7 +58,7 @@ namespace TestProject2
 
             var daysInMonth = DateTime.DaysInMonth(start.Year, start.Month); // 當月有幾天
 
-            var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == start.ToString("yyyyMM"));
+            var budget = _budgetRepo.GetAll().FirstOrDefault(a => a.YearMonth == start.ToString("yyyyMM"));
 
             if (budget != null)
             {
