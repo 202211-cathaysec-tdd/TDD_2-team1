@@ -50,7 +50,20 @@ namespace TestProject2
                     overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
                 }
 
-                result += GetDayBudget(overlappingStart, overlappingEnd);
+                decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
+
+                var daysInMonth = DateTime.DaysInMonth(overlappingStart.Year, overlappingStart.Month); // 當月有幾天
+
+                var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == overlappingStart.ToString("yyyyMM"));
+
+                if (budget != null)
+                {
+                    result += overlappingDays * budget.Amount / daysInMonth;
+                }
+                else
+                {
+                    result += 0;
+                }
 
                 currentDate = currentDate.AddMonths(1);
             }
