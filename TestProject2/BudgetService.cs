@@ -7,6 +7,18 @@ using System.Linq;
 
 namespace TestProject2
 {
+    public class Period
+    {
+        public Period(DateTime start, DateTime end)
+        {
+            Start = start;
+            End = end;
+        }
+
+        public DateTime End { get; private set; }
+        public DateTime Start { get; private set; }
+    }
+
     public class BudgetService
     {
         readonly IBudgetRepo _budget;
@@ -35,7 +47,7 @@ namespace TestProject2
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
-                    var overlappingDays = OverlappingDays(start, end, budget);
+                    var overlappingDays = OverlappingDays(new Period(start, end), budget);
 
                     var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
 
@@ -48,19 +60,19 @@ namespace TestProject2
             return result;
         }
 
-        private static decimal OverlappingDays(DateTime start, DateTime end, Budget budget)
+        private static decimal OverlappingDays(Period period, Budget budget)
         {
             DateTime overlappingStart;
             DateTime overlappingEnd;
-            if (budget.YearMonth == start.ToString("yyyyMM"))
+            if (budget.YearMonth == period.Start.ToString("yyyyMM"))
             {
-                overlappingStart = start;
+                overlappingStart = period.Start;
                 overlappingEnd = budget.LastDay();
             }
-            else if (budget.YearMonth == end.ToString("yyyyMM"))
+            else if (budget.YearMonth == period.End.ToString("yyyyMM"))
             {
                 overlappingStart = budget.FirstDay();
-                overlappingEnd = end;
+                overlappingEnd = period.End;
             }
             else
             {
