@@ -23,11 +23,11 @@ namespace TestProject2
                 return 0;
             }
 
-            decimal reuslt = 0;
+            decimal result = 0;
 
             if (start.Year == end.Year && start.Month == end.Month)
             {
-                reuslt = GetDayBudget(start, end);
+                result = GetDayBudget(start, end);
             }
             else
             {
@@ -37,21 +37,21 @@ namespace TestProject2
                 {
                     if (i == 0)
                     {
-                        reuslt += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
+                        result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
                     }
                     else if (i == month)
                     {
-                        reuslt += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
+                        result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
                     }
                     else
                     {
                         var temp = start.AddMonths(i);
-                        reuslt += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
+                        result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
                     }
                 }
             }
 
-            return reuslt;
+            return result;
         }
 
         /// <summary>
