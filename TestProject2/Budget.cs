@@ -11,6 +11,16 @@ namespace TestProject2
         public int Amount { get; set; }
         public string YearMonth { get; set; }
 
+        public Period CreatePeriod()
+        {
+            return new Period(FirstDay(), LastDay());
+        }
+
+        public decimal Days()
+        {
+            return LastDay().Day;
+        }
+
         public DateTime FirstDay()
         {
             return DateTime.ParseExact(YearMonth, "yyyyMM", null);
@@ -21,11 +31,6 @@ namespace TestProject2
             var firstDay = FirstDay();
             var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
             return new DateTime(firstDay.Year, firstDay.Month, daysInMonth);
-        }
-
-        public Period CreatePeriod()
-        {
-            return new Period(FirstDay(), LastDay());
         }
     }
 }

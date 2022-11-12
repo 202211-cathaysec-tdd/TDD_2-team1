@@ -38,7 +38,7 @@ namespace TestProject2
                 {
                     var overlappingDays = period.OverlappingDays(budget.CreatePeriod());
 
-                    var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
+                    var daysInMonth = budget.Days();
 
                     result += overlappingDays * budget.Amount / daysInMonth;
                 }
