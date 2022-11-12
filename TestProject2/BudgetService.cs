@@ -37,12 +37,12 @@ namespace TestProject2
                 {
                     DateTime overlappingStart;
                     DateTime overlappingEnd;
-                    if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
+                    if (budget.YearMonth == start.ToString("yyyyMM"))
                     {
                         overlappingStart = start;
                         overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
                     }
-                    else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
+                    else if (budget.YearMonth == end.ToString("yyyyMM"))
                     {
                         overlappingStart = new DateTime(end.Year, end.Month, 1);
                         overlappingEnd = end;
