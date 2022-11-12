@@ -19,6 +19,11 @@ namespace TestProject2
 
         public decimal OverlappingDays(Period another)
         {
+            if (Start > End)
+            {
+                return 0;
+            }
+
             DateTime overlappingStart = Start > another.Start
                 ? Start
                 : another.Start;
