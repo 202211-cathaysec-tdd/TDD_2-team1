@@ -25,9 +25,10 @@ namespace TestProject2
 
             decimal result = 0;
 
-            if (start.Year == end.Year && start.Month == end.Month)
+            // if (start.Year == end.Year && start.Month == end.Month)
+            if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
             {
-                result = GetDayBudget(start, end);
+                return GetDayBudget(start, end);
             }
             else
             {
