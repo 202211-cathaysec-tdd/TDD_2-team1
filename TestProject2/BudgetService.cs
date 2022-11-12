@@ -55,11 +55,11 @@ namespace TestProject2
             if (budget.YearMonth == start.ToString("yyyyMM"))
             {
                 overlappingStart = start;
-                overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
+                overlappingEnd = budget.LastDay();
             }
             else if (budget.YearMonth == end.ToString("yyyyMM"))
             {
-                overlappingStart = new DateTime(end.Year, end.Month, 1);
+                overlappingStart = budget.FirstDay();
                 overlappingEnd = end;
             }
             else
@@ -68,8 +68,7 @@ namespace TestProject2
                 overlappingEnd = budget.LastDay();
             }
 
-            decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
-            return overlappingDays;
+            return (overlappingEnd.Date - overlappingStart.Date).Days + 1;
         }
 
         /// <summary>
