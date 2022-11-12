@@ -32,25 +32,29 @@ namespace TestProject2
             decimal result = 0;
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
+                DateTime overlappingStart;
+                DateTime overlappingEnd;
                 if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
                 {
-                    var overlappingStart = start;
-                    var overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
-                    result += GetDayBudget(overlappingStart, overlappingEnd);
+                    overlappingStart = start;
+                    overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
+                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
                 {
-                    var overlappingStart = new DateTime(end.Year, end.Month, 1);
-                    var overlappingEnd = end;
-                    result += GetDayBudget(overlappingStart, overlappingEnd);
+                    overlappingStart = new DateTime(end.Year, end.Month, 1);
+                    overlappingEnd = end;
+                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else
                 {
                     var temp = currentDate;
-                    var overlappingStart = new DateTime(temp.Year, temp.Month, 1);
-                    var overlappingEnd = new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1);
-                    result += GetDayBudget(overlappingStart, overlappingEnd);
+                    overlappingStart = new DateTime(temp.Year, temp.Month, 1);
+                    overlappingEnd = new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1);
+                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
+
+                result += GetDayBudget(overlappingStart, overlappingEnd);
 
                 currentDate = currentDate.AddMonths(1);
             }
