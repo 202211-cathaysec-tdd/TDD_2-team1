@@ -32,37 +32,32 @@ namespace TestProject2
             decimal result = 0;
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
-                DateTime overlappingStart;
-                DateTime overlappingEnd;
-                if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
-                {
-                    overlappingStart = start;
-                    overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
-                }
-                else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
-                {
-                    overlappingStart = new DateTime(end.Year, end.Month, 1);
-                    overlappingEnd = end;
-                }
-                else
-                {
-                    overlappingStart = new DateTime(currentDate.Year, currentDate.Month, 1);
-                    overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
-                }
-
-                decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
-
-                var daysInMonth = DateTime.DaysInMonth(overlappingStart.Year, overlappingStart.Month); // 當月有幾天
-
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
-
                 if (budget != null)
                 {
+                    DateTime overlappingStart;
+                    DateTime overlappingEnd;
+                    if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
+                    {
+                        overlappingStart = start;
+                        overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
+                    }
+                    else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
+                    {
+                        overlappingStart = new DateTime(end.Year, end.Month, 1);
+                        overlappingEnd = end;
+                    }
+                    else
+                    {
+                        overlappingStart = new DateTime(currentDate.Year, currentDate.Month, 1);
+                        overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
+                    }
+
+                    decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
+
+                    var daysInMonth = DateTime.DaysInMonth(overlappingStart.Year, overlappingStart.Month); // 當月有幾天
+
                     result += overlappingDays * budget.Amount / daysInMonth;
-                }
-                else
-                {
-                    result += 0;
                 }
 
                 currentDate = currentDate.AddMonths(1);
