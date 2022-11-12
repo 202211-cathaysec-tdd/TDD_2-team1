@@ -37,6 +37,10 @@ namespace TestProject2
                 {
                     result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
                 }
+                else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
+                {
+                    result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
+                }
 
                 month++;
                 currentDate = currentDate.AddMonths(1);
@@ -50,7 +54,7 @@ namespace TestProject2
                 }
                 else if (i == month - 1)
                 {
-                    result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
+                    // result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
                 }
                 else
                 {
