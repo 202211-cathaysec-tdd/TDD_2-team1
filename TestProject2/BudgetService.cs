@@ -86,13 +86,9 @@ namespace TestProject2
         private int GetMonth(DateTime start, DateTime end)
         {
             var count = 0;
-            // var sYM = start.Year * 100 + start.Month; //202202
-            // var eYM = end.Year * 100 + end.Month; //202302
             var currentDate = start;
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
-                // var YM = start.AddMonths(++count);
-                // sYM = YM.Year * 100 + YM.Month;
                 count++;
                 currentDate = currentDate.AddMonths(1);
             }
