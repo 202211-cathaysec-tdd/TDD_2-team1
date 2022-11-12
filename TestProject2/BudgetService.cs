@@ -30,18 +30,23 @@ namespace TestProject2
 
             var month = 0;
             var currentDate = start;
+            decimal result = 0;
             while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
             {
+                if (currentDate.ToString("yyyyMM") == start.ToString("yyyyMM"))
+                {
+                    result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
+                }
+
                 month++;
                 currentDate = currentDate.AddMonths(1);
             }
 
-            decimal result = 0;
             for (int i = 0; i < month; i++)
             {
                 if (i == 0)
                 {
-                    result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
+                    // result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
                 }
                 else if (i == month - 1)
                 {
