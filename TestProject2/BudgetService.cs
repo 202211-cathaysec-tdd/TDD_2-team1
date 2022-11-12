@@ -28,7 +28,13 @@ namespace TestProject2
                 return GetDayBudget(start, end);
             }
 
-            int month = GetMonth(start, end);
+            var month = 0;
+            var currentDate = start;
+            while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
+            {
+                month++;
+                currentDate = currentDate.AddMonths(1);
+            }
 
             decimal result = 0;
             for (int i = 0; i < month; i++)
@@ -81,19 +87,6 @@ namespace TestProject2
             }
 
             return result;
-        }
-
-        private int GetMonth(DateTime start, DateTime end)
-        {
-            var count = 0;
-            var currentDate = start;
-            while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
-            {
-                count++;
-                currentDate = currentDate.AddMonths(1);
-            }
-
-            return count;
         }
     }
 }
