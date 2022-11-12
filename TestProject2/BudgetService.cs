@@ -70,11 +70,11 @@ namespace TestProject2
 
             var daysInMonth = DateTime.DaysInMonth(start.Year, start.Month); // 當月有幾天
 
-            var budgetResult = _budget.GetAll().FirstOrDefault(a => a.YearMonth == start.ToString("yyyyMM"));
+            var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == start.ToString("yyyyMM"));
 
-            if (budgetResult != null)
+            if (budget != null)
             {
-                return (diffStart * budgetResult.Amount / daysInMonth);
+                return (diffStart * budget.Amount / daysInMonth);
             }
 
             return 0;
