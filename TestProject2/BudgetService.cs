@@ -55,7 +55,7 @@ namespace TestProject2
 
                     decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
 
-                    var daysInMonth = DateTime.DaysInMonth(overlappingStart.Year, overlappingStart.Month); // 當月有幾天
+                    var daysInMonth = DateTime.DaysInMonth(currentDate.Year, currentDate.Month); // 當月有幾天
 
                     result += overlappingDays * budget.Amount / daysInMonth;
                 }
