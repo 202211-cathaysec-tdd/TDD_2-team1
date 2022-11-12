@@ -41,6 +41,11 @@ namespace TestProject2
                 {
                     result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
                 }
+                else
+                {
+                    var temp = currentDate;
+                    result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
+                }
 
                 month++;
                 currentDate = currentDate.AddMonths(1);
@@ -58,8 +63,8 @@ namespace TestProject2
                 }
                 else
                 {
-                    var temp = start.AddMonths(i);
-                    result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
+                    // var temp = start.AddMonths(i);
+                    // result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
                 }
             }
 
