@@ -15,5 +15,12 @@ namespace TestProject2
         {
             return DateTime.ParseExact(YearMonth, "yyyyMM", null);
         }
+
+        public DateTime LastDay()
+        {
+            var firstDay = FirstDay();
+            var daysInMonth = DateTime.DaysInMonth(firstDay.Year, firstDay.Month);
+            return new DateTime(firstDay.Year, firstDay.Month, daysInMonth);
+        }
     }
 }

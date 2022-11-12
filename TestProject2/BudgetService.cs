@@ -50,7 +50,7 @@ namespace TestProject2
                     else
                     {
                         overlappingStart = budget.FirstDay();
-                        overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
+                        overlappingEnd = budget.LastDay();
                     }
 
                     decimal overlappingDays = (overlappingEnd.Date - overlappingStart.Date).Days + 1; // 同年月跨日
