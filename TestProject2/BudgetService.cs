@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Linq;
 
 #endregion
 
@@ -22,15 +23,9 @@ namespace TestProject2
                 return 0;
             }
 
-            decimal result = 0;
             var period = new Period(start, end);
 
-            foreach (var budget in _budgetRepo.GetAll())
-            {
-                result += budget.OverlappingAmount(period);
-            }
-
-            return result;
+            return _budgetRepo.GetAll().Sum(budget => budget.OverlappingAmount(period));
         }
     }
 }
