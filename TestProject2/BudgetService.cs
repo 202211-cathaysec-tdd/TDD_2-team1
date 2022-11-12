@@ -38,9 +38,7 @@ namespace TestProject2
                 {
                     var overlappingDays = period.OverlappingDays(budget.CreatePeriod());
 
-                    var daysInMonth = budget.Days();
-
-                    result += overlappingDays * budget.Amount / daysInMonth;
+                    result += overlappingDays * (budget.Amount / budget.Days());
                 }
 
                 currentDate = currentDate.AddMonths(1);
