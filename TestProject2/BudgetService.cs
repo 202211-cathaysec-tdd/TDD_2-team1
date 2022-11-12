@@ -28,22 +28,12 @@ namespace TestProject2
                 return GetDayBudget(start, end);
             }
 
-            var currentDate = start;
             decimal result = 0;
             var period = new Period(start, end);
 
             foreach (var budget in _budgetRepo.GetAll())
             {
-                // }
-                // while (currentDate < new DateTime(end.Year, end.Month, 1).AddMonths(1))
-                // {
-                //     var budget = _budgetRepo.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
-                //     if (budget != null)
-                //     {
                 result += budget.OverlappingAmount(period);
-                // }
-                //
-                // currentDate = currentDate.AddMonths(1);
             }
 
             return result;
