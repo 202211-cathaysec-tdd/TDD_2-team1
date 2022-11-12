@@ -23,32 +23,28 @@ namespace TestProject2
                 return 0;
             }
 
-            decimal result = 0;
-
-            // if (start.Year == end.Year && start.Month == end.Month)
             if (start.ToString("yyyyMM") == end.ToString("yyyyMM"))
             {
                 return GetDayBudget(start, end);
             }
-            else
-            {
-                int month = GetMonth(start, end);
 
-                for (int i = 0; i <= month; i++)
+            int month = GetMonth(start, end);
+
+            decimal result = 0;
+            for (int i = 0; i <= month; i++)
+            {
+                if (i == 0)
                 {
-                    if (i == 0)
-                    {
-                        result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
-                    }
-                    else if (i == month)
-                    {
-                        result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
-                    }
-                    else
-                    {
-                        var temp = start.AddMonths(i);
-                        result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
-                    }
+                    result += GetDayBudget(start, new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1));
+                }
+                else if (i == month)
+                {
+                    result += GetDayBudget(new DateTime(end.Year, end.Month, 1), end);
+                }
+                else
+                {
+                    var temp = start.AddMonths(i);
+                    result += GetDayBudget(new DateTime(temp.Year, temp.Month, 1), new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1));
                 }
             }
 
