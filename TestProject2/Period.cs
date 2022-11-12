@@ -20,9 +20,9 @@ namespace TestProject2
         public decimal OverlappingDays(Budget budget)
         {
             var another = new Period(budget.FirstDay(), budget.LastDay());
-            var firstDay = budget.FirstDay();
-            var lastDay = budget.LastDay();
-            
+            var firstDay = another.Start;
+            var lastDay = another.End;
+
             DateTime overlappingStart = Start > firstDay
                 ? Start
                 : firstDay;
