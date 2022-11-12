@@ -36,18 +36,13 @@ namespace TestProject2
                 var budget = _budget.GetAll().FirstOrDefault(a => a.YearMonth == currentDate.ToString("yyyyMM"));
                 if (budget != null)
                 {
-                    result += OverlappingAmount(period, budget);
+                    result += budget.OverlappingAmount(period);
                 }
 
                 currentDate = currentDate.AddMonths(1);
             }
 
             return result;
-        }
-
-        private static decimal OverlappingAmount(Period period, Budget budget)
-        {
-            return period.OverlappingDays(budget.CreatePeriod()) * budget.DailyAmount();
         }
 
         /// <summary>

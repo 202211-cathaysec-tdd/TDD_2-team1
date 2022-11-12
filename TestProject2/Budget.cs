@@ -37,5 +37,10 @@ namespace TestProject2
         {
             return Amount / Days();
         }
+
+        public decimal OverlappingAmount(Period period)
+        {
+            return period.OverlappingDays(CreatePeriod()) * DailyAmount();
+        }
     }
 }
