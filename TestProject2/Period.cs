@@ -14,8 +14,8 @@ namespace TestProject2
             End = end;
         }
 
-        public DateTime End { get; private set; }
-        public DateTime Start { get; private set; }
+        private DateTime End { get; }
+        private DateTime Start { get; }
 
         public decimal OverlappingDays(Period another)
         {
@@ -24,11 +24,11 @@ namespace TestProject2
                 return 0;
             }
 
-            DateTime overlappingStart = Start > another.Start
+            var overlappingStart = Start > another.Start
                 ? Start
                 : another.Start;
 
-            DateTime overlappingEnd = End < another.End
+            var overlappingEnd = End < another.End
                 ? End
                 : another.End;
 
