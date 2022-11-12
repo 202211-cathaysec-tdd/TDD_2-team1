@@ -38,20 +38,17 @@ namespace TestProject2
                 {
                     overlappingStart = start;
                     overlappingEnd = new DateTime(start.Year, start.Month, 1).AddMonths(1).AddDays(-1);
-                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else if (currentDate.ToString("yyyMM") == end.ToString("yyyyMM"))
                 {
                     overlappingStart = new DateTime(end.Year, end.Month, 1);
                     overlappingEnd = end;
-                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
                 else
                 {
                     var temp = currentDate;
                     overlappingStart = new DateTime(temp.Year, temp.Month, 1);
                     overlappingEnd = new DateTime(temp.Year, temp.Month, 1).AddMonths(1).AddDays(-1);
-                    // result += GetDayBudget(overlappingStart, overlappingEnd);
                 }
 
                 result += GetDayBudget(overlappingStart, overlappingEnd);
