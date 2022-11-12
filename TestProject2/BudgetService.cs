@@ -66,28 +66,18 @@ namespace TestProject2
         /// <returns></returns>
         private decimal GetDayBudget(DateTime start, DateTime end)
         {
-            // decimal result = 0;
-
-            var queryStart = start.ToString("yyyyMM");
-
-            var diff = end.Date - start.Date;
-
-            decimal diffStart = diff.Days + 1; // 同年月跨日
+            decimal diffStart = (end.Date - start.Date).Days + 1; // 同年月跨日
 
             var daysInMonth = DateTime.DaysInMonth(start.Year, start.Month); // 當月有幾天
 
-            var budgetResult = _budget.GetAll().FirstOrDefault(a => a.YearMonth == queryStart);
+            var budgetResult = _budget.GetAll().FirstOrDefault(a => a.YearMonth == start.ToString("yyyyMM"));
 
             if (budgetResult != null)
             {
                 return (diffStart * budgetResult.Amount / daysInMonth);
             }
-            else
-            {
-                return 0;
-            }
 
-            // return result;
+            return 0;
         }
     }
 }
