@@ -26,21 +26,6 @@ namespace TestProject2
             DateTime overlappingEnd = End < budget.LastDay()
                 ? End
                 : budget.LastDay();
-            if (budget.YearMonth == Start.ToString("yyyyMM"))
-            {
-                // overlappingStart = Start;
-                // overlappingEnd = budget.LastDay();
-            }
-            else if (budget.YearMonth == End.ToString("yyyyMM"))
-            {
-                // overlappingStart = budget.FirstDay();
-                // overlappingEnd = End;
-            }
-            else
-            {
-                // overlappingStart = budget.FirstDay();
-                // overlappingEnd = budget.LastDay();
-            }
 
             return (overlappingEnd.Date - overlappingStart.Date).Days + 1;
         }
