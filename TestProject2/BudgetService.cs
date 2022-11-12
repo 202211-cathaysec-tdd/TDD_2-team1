@@ -49,7 +49,7 @@ namespace TestProject2
                     }
                     else
                     {
-                        overlappingStart = new DateTime(currentDate.Year, currentDate.Month, 1);
+                        overlappingStart = budget.FirstDay();
                         overlappingEnd = new DateTime(currentDate.Year, currentDate.Month, 1).AddMonths(1).AddDays(-1);
                     }
 
